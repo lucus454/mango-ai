@@ -1,0 +1,1522 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI芒果农业教学平台 - 智慧农业助农平台</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/v4-shims.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#FF8C00', // 芒果橙
+                        secondary: '#22C55E', // 生态绿
+                        accent: '#3B82F6', // 科技蓝
+                        dark: '#1F2937',
+                        light: '#F3F4F6'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .gradient-primary {
+                background: linear-gradient(135deg, #FF8C00 0%, #FFA500 100%);
+            }
+            .gradient-green {
+                background: linear-gradient(135deg, #22C55E 0%, #4ADE80 100%);
+            }
+            .gradient-blue {
+                background: linear-gradient(135deg, #3B82F6 0%, #60A5FA 100%);
+            }
+            .gradient-purple {
+                background: linear-gradient(135deg, #8B5CF6 0%, #A78BFA 100%);
+            }
+            .gradient-orange {
+                background: linear-gradient(135deg, #F97316 0%, #FB923C 100%);
+            }
+            .gradient-pink {
+                background: linear-gradient(135deg, #EC4899 0%, #F472B6 100%);
+            }
+            .gradient-teal {
+                background: linear-gradient(135deg, #14B8A6 0%, #2DD4BF 100%);
+            }
+            .gradient-red {
+                background: linear-gradient(135deg, #EF4444 0%, #F87171 100%);
+            }
+            .gradient-indigo {
+                background: linear-gradient(135deg, #6366F1 0%, #818CF8 100%);
+            }
+            .gradient-cyan {
+                background: linear-gradient(135deg, #06B6D4 0%, #22D3EE 100%);
+            }
+            .card-hover {
+                transition: all 0.3s ease;
+            }
+            .card-hover:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            }
+            .text-gradient {
+                background-clip: text;
+                -webkit-background-clip: text;
+                color: transparent;
+                background-image: linear-gradient(135deg, #FF8C00 0%, #FFA500 100%);
+            }
+        }
+        
+        @layer components {
+            #features {
+                opacity: 1;
+                transform: none;
+                transition: opacity 0.3s ease;
+            }
+            
+            .feature-card {
+                display: flex;
+                flex-direction: column;
+                opacity: 1;
+                visibility: visible;
+            }
+            
+            .feature-icon {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            
+            img {
+                display: block;
+                max-width: 100%;
+                height: auto;
+            }
+            
+            button {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                white-space: nowrap;
+            }
+        }
+    </style>
+</head>
+<body class="font-sans bg-gradient-to-br from-orange-50 via-green-50 to-yellow-50" style="opacity: 1; visibility: visible;">
+    <!-- 导航栏 -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 bg-white/95 shadow-md">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <div class="w-12 h-12 gradient-primary rounded-full flex items-center justify-center">
+                        <i class="fa fa-leaf text-white text-xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl font-bold text-dark">AI芒果农业教学平台</h1>
+                        <p class="text-xs text-gray-600">智慧农业 · 科技助农</p>
+                    </div>
+                </div>
+                
+                <!-- 桌面导航 -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="text-gray-800 hover:text-primary transition-colors">首页</a>
+                    <a href="#features" class="text-gray-800 hover:text-primary transition-colors">核心功能</a>
+                    <a href="#statistics" class="text-gray-800 hover:text-primary transition-colors">平台数据</a>
+                    <a href="#success" class="text-gray-800 hover:text-primary transition-colors">成功案例</a>
+                    <a href="#contact" class="text-gray-800 hover:text-primary transition-colors">联系我们</a>
+                </div>
+                
+                <!-- 登录/注册按钮 -->
+                <div class="flex items-center space-x-4">
+                    <button id="loginRegisterBtn" class="gradient-green text-white px-6 py-3 rounded-xl text-sm font-semibold transition-all hover:scale-105">
+                        <i class="fa fa-user mr-2"></i>登录/注册
+                    </button>
+                    <button class="md:hidden text-gray-800 text-xl hover:text-primary transition-colors">
+                        <i class="fa fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 英雄区域 -->
+    <section id="home" class="pt-40 pb-20 px-4">
+        <div class="container mx-auto">
+            <div class="max-w-6xl mx-auto">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div class="text-center lg:text-left">
+                        <h1 class="text-[clamp(2.5rem,6vw,4rem)] font-bold text-dark mb-6 leading-tight">
+                            <span class="text-gradient">AI赋能</span>芒果产业<br>
+                            <span class="text-dark">助力乡村振兴</span>
+                        </h1>
+                        <p class="text-[clamp(1rem,2vw,1.25rem)] text-gray-600 mb-8 max-w-lg">
+                            融合人工智能与农业技术，打造全国领先的芒果产业数字化平台，为芒果种植户提供全方位的技术支持和服务
+                        </p>
+                        
+                        <div class="flex flex-col sm:flex-row justify-center lg:justify-start gap-4">
+                            <button onclick="window.location.href='#features'" class="gradient-primary text-white px-8 py-4 rounded-xl text-lg font-semibold transition-all hover:scale-105 hover:shadow-lg">
+                                <i class="fa fa-rocket mr-2"></i>开始使用
+                            </button>
+                            <button onclick="window.location.href='#contact'" class="bg-white text-dark px-8 py-4 rounded-xl text-lg font-semibold transition-all hover:scale-105 hover:shadow-lg border border-gray-200">
+                                <i class="fa fa-info-circle mr-2"></i>了解更多
+                            </button>
+                        </div>
+                        
+                        <!-- 平台数据 -->
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12">
+                            <div class="text-center">
+                                <div class="text-3xl font-bold text-primary mb-2">10万+</div>
+                                <div class="text-sm text-gray-600">注册农户</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-3xl font-bold text-secondary mb-2">500万+</div>
+                                <div class="text-sm text-gray-600">服务人次</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-3xl font-bold text-accent mb-2">80%</div>
+                                <div class="text-sm text-gray-600">产量提升</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-3xl font-bold text-purple-600 mb-2">200亿+</div>
+                                <div class="text-sm text-gray-600">产值增长</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="relative">
+                        <div class="relative z-10 rounded-3xl overflow-hidden shadow-2xl">
+                            <img src="https://picsum.photos/800/600?random=1000" alt="AI芒果农业教学平台" class="w-full h-auto">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex items-end">
+                                <div class="p-6">
+                                    <h3 class="text-white text-xl font-bold mb-2">智慧农业新时代</h3>
+                                    <p class="text-white/80 text-sm">让每一颗芒果都充满科技的力量</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 核心功能区域 -->
+    <section id="features" class="py-16 md:py-20 px-4 bg-white min-h-screen">
+        <div class="container mx-auto">
+            <div class="text-center mb-12 md:mb-16">
+                <h2 class="text-[clamp(1.75rem,4vw,2.5rem)] md:text-[clamp(2rem,5vw,3rem)] font-bold text-dark mb-4">核心功能</h2>
+                <p class="text-[clamp(0.875rem,1.5vw,1.125rem)] md:text-[clamp(1rem,2vw,1.25rem)] text-gray-600 max-w-3xl mx-auto px-4">
+                    10大核心功能，全方位支持芒果产业发展，助力乡村振兴
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 max-w-7xl mx-auto px-2 sm:px-4">
+                <!-- 功能1 -->
+                <div class="bg-white rounded-2xl p-6 md:p-8 shadow-lg card-hover feature-card h-full min-h-[320px] md:min-h-[360px]">
+                    <div class="w-14 h-14 md:w-16 md:h-16 gradient-primary rounded-2xl flex items-center justify-center mb-4 md:mb-6 flex-shrink-0 feature-icon">
+                        <i class="fa fa-leaf text-white text-xl md:text-2xl"></i>
+                    </div>
+                    <h3 class="text-base md:text-lg font-bold text-dark mb-3 md:mb-4 leading-tight">AI芒果种植智能指导系统</h3>
+                    <p class="text-gray-600 text-xs md:text-sm mb-4 md:mb-6 flex-grow leading-relaxed">
+                        基于AI算法提供精准种植方案，包括土壤分析、施肥建议、灌溉计划等，提高产量和品质
+                    </p>
+                    <button onclick="window.location.href='https://agent.doubao.com.cn/obj/eden-cn/upnbsw-tss/ljhwZthlaukjlkulzlp/supertask_webview/33604952828236546/mango_ai_platform_v2/planting.html'" class="gradient-primary text-white px-4 md:px-6 py-2.5 md:py-3 rounded-lg text-xs md:text-sm font-semibold transition-all hover:scale-105 w-full sm:w-auto flex-shrink-0">
+                        <i class="fa fa-arrow-right mr-2"></i>立即使用
+                    </button>
+                </div>
+                
+                <!-- 功能2 -->
+                <div class="bg-white rounded-2xl p-6 md:p-8 shadow-lg card-hover feature-card h-full min-h-[320px] md:min-h-[360px]">
+                    <div class="w-14 h-14 md:w-16 md:h-16 gradient-blue rounded-2xl flex items-center justify-center mb-4 md:mb-6 flex-shrink-0 feature-icon">
+                        <i class="fa fa-bar-chart text-white text-xl md:text-2xl"></i>
+                    </div>
+                    <h3 class="text-base md:text-lg font-bold text-dark mb-3 md:mb-4 leading-tight">芒果产业大数据分析平台</h3>
+                    <p class="text-gray-600 text-xs md:text-sm mb-4 md:mb-6 flex-grow leading-relaxed">
+                        整合全国芒果产业数据，提供市场趋势分析、价格预测、供需平衡等深度洞察
+                    </p>
+                    <button onclick="window.location.href='https://agent.doubao.com.cn/obj/eden-cn/upnbsw-tss/ljhwZthlaukjlkulzlp/supertask_webview/33604952828236546/mango_ai_platform_v2/industry.html'" class="gradient-blue text-white px-4 md:px-6 py-2.5 md:py-3 rounded-lg text-xs md:text-sm font-semibold transition-all hover:scale-105 w-full sm:w-auto flex-shrink-0">
+                        <i class="fa fa-arrow-right mr-2"></i>立即使用
+                    </button>
+                </div>
+                
+                <!-- 功能3 -->
+                <div class="bg-white rounded-2xl p-6 md:p-8 shadow-lg card-hover feature-card h-full min-h-[320px] md:min-h-[360px]">
+                    <div class="w-14 h-14 md:w-16 md:h-16 gradient-green rounded-2xl flex items-center justify-center mb-4 md:mb-6 flex-shrink-0 feature-icon">
+                        <i class="fa fa-shield text-white text-xl md:text-2xl"></i>
+                    </div>
+                    <h3 class="text-base md:text-lg font-bold text-dark mb-3 md:mb-4 leading-tight">芒果病虫害AI诊断系统</h3>
+                    <p class="text-gray-600 text-xs md:text-sm mb-4 md:mb-6 flex-grow leading-relaxed">
+                        通过图像识别技术快速诊断芒果病虫害，提供科学防治方案，减少损失提高收益
+                    </p>
+                    <button onclick="window.location.href='https://agent.doubao.com.cn/obj/eden-cn/upnbsw-tss/ljhwZthlaukjlkulzlp/supertask_webview/33604952828236546/mango_ai_platform_v2/diagnosis.html'" class="gradient-green text-white px-4 md:px-6 py-2.5 md:py-3 rounded-lg text-xs md:text-sm font-semibold transition-all hover:scale-105 w-full sm:w-auto flex-shrink-0">
+                        <i class="fa fa-arrow-right mr-2"></i>立即使用
+                    </button>
+                </div>
+                
+                <!-- 功能4 -->
+                <div class="bg-white rounded-2xl p-6 md:p-8 shadow-lg card-hover feature-card h-full min-h-[320px] md:min-h-[360px]">
+                    <div class="w-14 h-14 md:w-16 md:h-16 gradient-purple rounded-2xl flex items-center justify-center mb-4 md:mb-6 flex-shrink-0 feature-icon">
+                        <i class="fa fa-shopping-cart text-white text-xl md:text-2xl"></i>
+                    </div>
+                    <h3 class="text-base md:text-lg font-bold text-dark mb-3 md:mb-4 leading-tight">芒果销售电商平台</h3>
+                    <p class="text-gray-600 text-xs md:text-sm mb-4 md:mb-6 flex-grow leading-relaxed">
+                        提供B2B、B2C电商服务，连接产地与市场，支持直播带货、预售订购等多种销售模式
+                    </p>
+                    <button onclick="window.location.href='https://agent.doubao.com.cn/obj/eden-cn/upnbsw-tss/ljhwZthlaukjlkulzlp/supertask_webview/33604952828236546/mango_ai_platform_v2/ecommerce.html'" class="bg-gradient-to-r from-purple-600 to-purple-800 text-white px-4 md:px-6 py-2.5 md:py-3 rounded-lg text-xs md:text-sm font-semibold transition-all hover:scale-105 hover:shadow-lg w-full sm:w-auto flex-shrink-0">
+                        <i class="fa fa-arrow-right mr-2"></i>立即使用
+                    </button>
+                </div>
+                
+                <!-- 功能5 -->
+                <div class="bg-white rounded-2xl p-6 md:p-8 shadow-lg card-hover feature-card h-full min-h-[320px] md:min-h-[360px]">
+                    <div class="w-14 h-14 md:w-16 md:h-16 gradient-orange rounded-2xl flex items-center justify-center mb-4 md:mb-6 flex-shrink-0 feature-icon">
+                        <i class="fa fa-graduation-cap text-white text-xl md:text-2xl"></i>
+                    </div>
+                    <h3 class="text-base md:text-lg font-bold text-dark mb-3 md:mb-4 leading-tight">农业技术AI教学系统</h3>
+                    <p class="text-gray-600 text-xs md:text-sm mb-4 md:mb-6 flex-grow leading-relaxed">
+                        提供个性化学习路径，包含视频课程、在线考试、实践指导等功能，帮助用户提升种植技术
+                    </p>
+                    <button onclick="window.location.href='https://agent.doubao.com.cn/obj/eden-cn/upnbsw-tss/ljhwZthlaukjlkulzlp/supertask_webview/33604952828236546/mango_ai_platform_v2/education.html'" class="gradient-orange text-white px-4 md:px-6 py-2.5 md:py-3 rounded-lg text-xs md:text-sm font-semibold transition-all hover:scale-105 w-full sm:w-auto flex-shrink-0">
+                        <i class="fa fa-arrow-right mr-2"></i>立即使用
+                    </button>
+                </div>
+                
+                <!-- 功能6 -->
+                <div class="bg-white rounded-2xl p-6 md:p-8 shadow-lg card-hover feature-card h-full min-h-[320px] md:min-h-[360px]">
+                    <div class="w-14 h-14 md:w-16 md:h-16 gradient-pink rounded-2xl flex items-center justify-center mb-4 md:mb-6 flex-shrink-0 feature-icon">
+                        <i class="fa fa-eye text-white text-xl md:text-2xl"></i>
+                    </div>
+                    <h3 class="text-base md:text-lg font-bold text-dark mb-3 md:mb-4 leading-tight">芒果品种AI识别系统</h3>
+                    <p class="text-gray-600 text-xs md:text-sm mb-4 md:mb-6 flex-grow leading-relaxed">
+                        通过图像识别技术快速识别芒果品种，提供品种特性、种植要点等详细信息
+                    </p>
+                    <button onclick="window.location.href='https://agent.doubao.com.cn/obj/eden-cn/upnbsw-tss/ljhwZthlaukjlkulzlp/supertask_webview/33604952828236546/mango_ai_platform_v2/variety.html'" class="gradient-pink text-white px-4 md:px-6 py-2.5 md:py-3 rounded-lg text-xs md:text-sm font-semibold transition-all hover:scale-105 w-full sm:w-auto flex-shrink-0">
+                        <i class="fa fa-arrow-right mr-2"></i>立即使用
+                    </button>
+                </div>
+                
+                <!-- 功能7 -->
+                <div class="bg-white rounded-2xl p-6 md:p-8 shadow-lg card-hover feature-card h-full min-h-[320px] md:min-h-[360px]">
+                    <div class="w-14 h-14 md:w-16 md:h-16 gradient-teal rounded-2xl flex items-center justify-center mb-4 md:mb-6 flex-shrink-0 feature-icon">
+                        <i class="fa fa-line-chart text-white text-xl md:text-2xl"></i>
+                    </div>
+                    <h3 class="text-base md:text-lg font-bold text-dark mb-3 md:mb-4 leading-tight">芒果市场行情预测系统</h3>
+                    <p class="text-gray-600 text-xs md:text-sm mb-4 md:mb-6 flex-grow leading-relaxed">
+                        基于机器学习算法，预测未来芒果市场的价格走势和需求变化，帮助制定合理的销售策略
+                    </p>
+                    <button onclick="window.location.href='https://agent.doubao.com.cn/obj/eden-cn/upnbsw-tss/ljhwZthlaukjlkulzlp/supertask_webview/33604952828236546/mango_ai_platform_v2/market.html'" class="gradient-teal text-white px-4 md:px-6 py-2.5 md:py-3 rounded-lg text-xs md:text-sm font-semibold transition-all hover:scale-105 w-full sm:w-auto flex-shrink-0">
+                        <i class="fa fa-arrow-right mr-2"></i>立即使用
+                    </button>
+                </div>
+                
+                <!-- 功能8 -->
+                <div class="bg-white rounded-2xl p-6 md:p-8 shadow-lg card-hover feature-card h-full min-h-[320px] md:min-h-[360px]">
+                    <div class="w-14 h-14 md:w-16 md:h-16 gradient-red rounded-2xl flex items-center justify-center mb-4 md:mb-6 flex-shrink-0 feature-icon">
+                        <i class="fa fa-video-camera text-white text-xl md:text-2xl"></i>
+                    </div>
+                    <h3 class="text-base md:text-lg font-bold text-dark mb-3 md:mb-4 leading-tight">助农直播带货平台</h3>
+                    <p class="text-gray-600 text-xs md:text-sm mb-4 md:mb-6 flex-grow leading-relaxed">
+                        提供专业直播工具支持，连接消费者与产地，帮助农户销售农产品，增加收入
+                    </p>
+                    <button onclick="window.location.href='https://agent.doubao.com.cn/obj/eden-cn/upnbsw-tss/ljhwZthlaukjlkulzlp/supertask_webview/33604952828236546/mango_ai_platform_v2/help.html'" class="gradient-red text-white px-4 md:px-6 py-2.5 md:py-3 rounded-lg text-xs md:text-sm font-semibold transition-all hover:scale-105 w-full sm:w-auto flex-shrink-0">
+                        <i class="fa fa-arrow-right mr-2"></i>立即使用
+                    </button>
+                </div>
+                
+                <!-- 功能9 -->
+                <div class="bg-white rounded-2xl p-6 md:p-8 shadow-lg card-hover feature-card h-full min-h-[320px] md:min-h-[360px]">
+                    <div class="w-14 h-14 md:w-16 md:h-16 gradient-indigo rounded-2xl flex items-center justify-center mb-4 md:mb-6 flex-shrink-0 feature-icon">
+                        <i class="fa fa-cutlery text-white text-xl md:text-2xl"></i>
+                    </div>
+                    <h3 class="text-base md:text-lg font-bold text-dark mb-3 md:mb-4 leading-tight">芒果加工技术指导系统</h3>
+                    <p class="text-gray-600 text-xs md:text-sm mb-4 md:mb-6 flex-grow leading-relaxed">
+                        提供芒果深加工技术指导，包括芒果干、芒果汁、芒果酱等产品的制作方法
+                    </p>
+                    <button onclick="window.location.href='https://agent.doubao.com.cn/obj/eden-cn/upnbsw-tss/ljhwZthlaukjlkulzlp/supertask_webview/33604952828236546/mango_ai_platform_v2/processing.html'" class="gradient-indigo text-white px-4 md:px-6 py-2.5 md:py-3 rounded-lg text-xs md:text-sm font-semibold transition-all hover:scale-105 w-full sm:w-auto flex-shrink-0">
+                        <i class="fa fa-arrow-right mr-2"></i>立即使用
+                    </button>
+                </div>
+                
+                <!-- 功能10 -->
+                <div class="bg-white rounded-2xl p-6 md:p-8 shadow-lg card-hover feature-card h-full min-h-[320px] md:min-h-[360px]">
+                    <div class="w-14 h-14 md:w-16 md:h-16 gradient-cyan rounded-2xl flex items-center justify-center mb-4 md:mb-6 flex-shrink-0 feature-icon">
+                        <i class="fa fa-bullseye text-white text-xl md:text-2xl"></i>
+                    </div>
+                    <h3 class="text-base md:text-lg font-bold text-dark mb-3 md:mb-4 leading-tight">乡村振兴政策资讯平台</h3>
+                    <p class="text-gray-600 text-xs md:text-sm mb-4 md:mb-6 flex-grow leading-relaxed">
+                        实时更新乡村振兴相关政策，提供专业解读和项目申报指导，帮助农户享受政策红利
+                    </p>
+                    <button onclick="window.location.href='https://agent.doubao.com.cn/obj/eden-cn/upnbsw-tss/ljhwZthlaukjlkulzlp/supertask_webview/33604952828236546/mango_ai_platform_v2/policy.html'" class="gradient-cyan text-white px-4 md:px-6 py-2.5 md:py-3 rounded-lg text-xs md:text-sm font-semibold transition-all hover:scale-105 w-full sm:w-auto flex-shrink-0">
+                        <i class="fa fa-arrow-right mr-2"></i>立即使用
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 成功案例 -->
+    <section id="success" class="py-20 px-4">
+        <div class="container mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-[clamp(2rem,5vw,3rem)] font-bold text-dark mb-4">成功案例</h2>
+                <p class="text-[clamp(1rem,2vw,1.25rem)] text-gray-600 max-w-3xl mx-auto">
+                    看看我们帮助农户成功的故事，一起见证科技助农的力量
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <!-- 案例1 -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-lg card-hover">
+                    <div class="h-48 bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center relative overflow-hidden">
+                        <img src="https://picsum.photos/200/200?random=200" alt="李大叔" class="w-32 h-32 rounded-full border-4 border-white object-cover z-10">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-lg font-bold text-dark mb-2 text-center">李大叔（广西百色芒果种植户）</h3>
+                        <p class="text-gray-600 text-sm mb-4 text-center">
+                            "使用AI种植指导后，我的芒果产量提高了35%，病虫害减少了60%，年收入增加了8万元。现在我不仅自己富了，还带动了村里其他农户一起发展。"
+                        </p>
+                        <div class="flex justify-center space-x-4">
+                            <div class="text-center">
+                                <div class="text-2xl font-bold text-orange-600">35%</div>
+                                <div class="text-xs text-gray-600">产量提升</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-2xl font-bold text-orange-600">8万</div>
+                                <div class="text-xs text-gray-600">年收入增加(元)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 案例2 -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-lg card-hover">
+                    <div class="h-48 bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center relative overflow-hidden">
+                        <img src="https://picsum.photos/200/200?random=201" alt="芒果合作社" class="w-32 h-32 rounded-full border-4 border-white object-cover z-10">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-lg font-bold text-dark mb-2 text-center">芒果合作社（云南元江合作社）</h3>
+                        <p class="text-gray-600 text-sm mb-4 text-center">
+                            "我们合作社通过电商平台销售芒果，价格提高了40%，年销售额突破了500万元。现在我们的芒果品牌也越来越有名了，产品销往全国各地。"
+                        </p>
+                        <div class="flex justify-center space-x-4">
+                            <div class="text-center">
+                                <div class="text-2xl font-bold text-blue-600">40%</div>
+                                <div class="text-xs text-gray-600">价格提高</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-2xl font-bold text-blue-600">500万</div>
+                                <div class="text-xs text-gray-600">年销售额(元)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 案例3 -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-lg card-hover">
+                    <div class="h-48 bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center relative overflow-hidden">
+                        <img src="https://picsum.photos/200/200?random=202" alt="芒果加工厂" class="w-32 h-32 rounded-full border-4 border-white object-cover z-10">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-lg font-bold text-dark mb-2 text-center">芒果加工厂（海南三亚加工厂）</h3>
+                        <p class="text-gray-600 text-sm mb-4 text-center">
+                            "采用新技术加工芒果，产品附加值提高了200%，不仅打开了国内市场，还出口到了10多个国家和地区。现在我们的产品供不应求。"
+                        </p>
+                        <div class="flex justify-center space-x-4">
+                            <div class="text-center">
+                                <div class="text-2xl font-bold text-purple-600">200%</div>
+                                <div class="text-xs text-gray-600">附加值提升</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-2xl font-bold text-purple-600">10+</div>
+                                <div class="text-xs text-gray-600">出口国家</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 联系我们 -->
+    <section id="contact" class="py-20 px-4 bg-white">
+        <div class="container mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-[clamp(2rem,5vw,3rem)] font-bold text-dark mb-4">联系我们</h2>
+                <p class="text-[clamp(1rem,2vw,1.25rem)] text-gray-600 max-w-3xl mx-auto">
+                    如果您有任何问题或建议，欢迎联系我们，我们将竭诚为您服务
+                </p>
+            </div>
+            
+            <div class="max-w-6xl mx-auto">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                    <div>
+                        <div class="bg-gradient-to-br from-orange-50 to-yellow-50 rounded-2xl p-8 h-full">
+                            <h3 class="text-xl font-bold text-dark mb-6">联系方式</h3>
+                            
+                            <div class="space-y-6">
+                                <div class="flex items-start">
+                                    <div class="w-12 h-12 gradient-primary rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                        <i class="fa fa-phone text-white"></i>
+                                    </div>
+                                    <div class="ml-4">
+                                        <h4 class="font-semibold text-dark">客服电话</h4>
+                                        <p class="text-gray-600">400-123-4567</p>
+                                        <p class="text-gray-500 text-sm">工作日 9:00-18:00</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start">
+                                    <div class="w-12 h-12 gradient-blue rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                        <i class="fa fa-envelope text-white"></i>
+                                    </div>
+                                    <div class="ml-4">
+                                        <h4 class="font-semibold text-dark">电子邮箱</h4>
+                                        <p class="text-gray-600">service@mangoai.com</p>
+                                        <p class="text-gray-500 text-sm">24小时内回复</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start">
+                                    <div class="w-12 h-12 gradient-green rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                        <i class="fa fa-map-marker text-white"></i>
+                                    </div>
+                                    <div class="ml-4">
+                                        <h4 class="font-semibold text-dark">公司地址</h4>
+                                        <p class="text-gray-600">北京市海淀区中关村南大街5号智慧农业大厦15层</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start">
+                                    <div class="w-12 h-12 gradient-purple rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                        <i class="fa fa-weixin text-white"></i>
+                                    </div>
+                                    <div class="ml-4">
+                                        <h4 class="font-semibold text-dark">微信公众号</h4>
+                                        <p class="text-gray-600">AI芒果农业教学平台</p>
+                                        <p class="text-gray-500 text-sm">扫码关注获取更多资讯</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <div class="bg-white rounded-2xl p-8 shadow-lg">
+                            <h3 class="text-xl font-bold text-dark mb-6">在线咨询</h3>
+                            
+                            <form id="contactForm" class="space-y-6">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <div>
+                                        <label class="block text-gray-700 font-medium mb-2" for="contactName">
+                                            姓名
+                                        </label>
+                                        <input type="text" id="contactName" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all" 
+                                               placeholder="请输入您的姓名">
+                                    </div>
+                                    <div>
+                                        <label class="block text-gray-700 font-medium mb-2" for="contactPhone">
+                                            手机号
+                                        </label>
+                                        <input type="tel" id="contactPhone" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all" 
+                                               placeholder="请输入您的手机号">
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-gray-700 font-medium mb-2" for="contactEmail">
+                                        电子邮箱
+                                    </label>
+                                    <input type="email" id="contactEmail" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all" 
+                                           placeholder="请输入您的电子邮箱">
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-gray-700 font-medium mb-2" for="contactSubject">
+                                        咨询主题
+                                    </label>
+                                    <select id="contactSubject" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all">
+                                        <option value="">请选择咨询主题</option>
+                                        <option value="technical">技术咨询</option>
+                                        <option value="business">商务合作</option>
+                                        <option value="suggestion">意见建议</option>
+                                        <option value="other">其他问题</option>
+                                    </select>
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-gray-700 font-medium mb-2" for="contactMessage">
+                                        咨询内容
+                                    </label>
+                                    <textarea id="contactMessage" rows="5" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all" 
+                                              placeholder="请输入您的咨询内容"></textarea>
+                                </div>
+                                
+                                <div class="flex items-center">
+                                    <input id="contactAgree" type="checkbox" class="h-4 w-4 text-orange-600 focus:ring-orange-500 border-gray-300 rounded">
+                                    <label for="contactAgree" class="ml-2 block text-sm text-gray-700">
+                                        我已阅读并同意<a href="#" class="text-orange-600 hover:text-orange-700 transition-colors">隐私政策</a>
+                                    </label>
+                                </div>
+                                
+                                <button type="submit" class="w-full gradient-primary text-white py-4 rounded-xl text-lg font-semibold transition-all hover:scale-105 hover:shadow-lg">
+                                    <i class="fa fa-paper-plane mr-2"></i>提交咨询
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="bg-dark text-white py-12 px-4">
+        <div class="container mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <!-- 公司信息 -->
+                <div>
+                    <div class="flex items-center space-x-3 mb-6">
+                        <div class="w-12 h-12 gradient-primary rounded-full flex items-center justify-center">
+                            <i class="fa fa-leaf text-white text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold">AI芒果农业教学平台</h3>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 mb-6">
+                        融合人工智能与农业技术，打造全国领先的芒果产业数字化平台，助力乡村振兴。
+                    </p>
+                </div>
+                
+                <!-- 快速链接 -->
+                <div>
+                    <h4 class="text-lg font-bold mb-6">快速链接</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#home" class="text-gray-400 hover:text-orange-300 transition-colors">首页</a></li>
+                        <li><a href="#features" class="text-gray-400 hover:text-orange-300 transition-colors">核心功能</a></li>
+                        <li><a href="#statistics" class="text-gray-400 hover:text-orange-300 transition-colors">平台数据</a></li>
+                        <li><a href="#success" class="text-gray-400 hover:text-orange-300 transition-colors">成功案例</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-orange-300 transition-colors">联系我们</a></li>
+                    </ul>
+                </div>
+                
+                <!-- 功能模块 -->
+                <div>
+                    <h4 class="text-lg font-bold mb-6">功能模块</h4>
+                    <ul class="space-y-3">
+                        <li><a href="https://agent.doubao.com.cn/obj/eden-cn/upnbsw-tss/ljhwZthlaukjlkulzlp/supertask_webview/33604952828236546/mango_ai_platform_v2/planting.html" class="text-gray-400 hover:text-orange-300 transition-colors">AI种植指导</a></li>
+                        <li><a href="https://agent.doubao.com.cn/obj/eden-cn/upnbsw-tss/ljhwZthlaukjlkulzlp/supertask_webview/33604952828236546/mango_ai_platform_v2/diagnosis.html" class="text-gray-400 hover:text-orange-300 transition-colors">病虫害诊断</a></li>
+                        <li><a href="https://agent.doubao.com.cn/obj/eden-cn/upnbsw-tss/ljhwZthlaukjlkulzlp/supertask_webview/33604952828236546/mango_ai_platform_v2/ecommerce.html" class="text-gray-400 hover:text-orange-300 transition-colors">电商平台</a></li>
+                        <li><a href="https://agent.doubao.com.cn/obj/eden-cn/upnbsw-tss/ljhwZthlaukjlkulzlp/supertask_webview/33604952828236546/mango_ai_platform_v2/education.html" class="text-gray-400 hover:text-orange-300 transition-colors">农业教学</a></li>
+                    </ul>
+                </div>
+                
+                <!-- 联系信息 -->
+                <div>
+                    <h4 class="text-lg font-bold mb-6">联系我们</h4>
+                    <ul class="space-y-3">
+                        <li class="flex items-center text-gray-400">
+                            <i class="fa fa-phone mr-3"></i>
+                            <span>400-123-4567</span>
+                        </li>
+                        <li class="flex items-center text-gray-400">
+                            <i class="fa fa-envelope mr-3"></i>
+                            <span>service@mangoai.com</span>
+                        </li>
+                        <li class="flex items-start text-gray-400">
+                            <i class="fa fa-map-marker mr-3 mt-1"></i>
+                            <span>北京市海淀区中关村南大街5号智慧农业大厦15层</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-500">
+                <p>&copy; 2025 AI芒果农业教学平台. 保留所有权利. | 京ICP备12345678号</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 返回顶部按钮 -->
+    <button id="backToTop" class="fixed bottom-8 left-8 w-12 h-12 gradient-primary rounded-full flex items-center justify-center text-white shadow-lg opacity-0 invisible transition-all duration-300 hover:scale-110 z-50">
+        <i class="fa fa-arrow-up"></i>
+    </button>
+
+    <!-- 登录/注册弹窗 -->
+    <div id="loginRegisterModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-2xl w-full max-w-md mx-4 overflow-hidden shadow-2xl transform transition-all duration-300 scale-95 opacity-0" id="modalContent">
+            <!-- 弹窗头部 -->
+            <div class="bg-gradient-to-r from-orange-500 to-orange-600 p-6 text-white">
+                <div class="flex justify-between items-center">
+                    <h3 class="text-xl font-bold" id="modalTitle">用户登录</h3>
+                    <button id="closeModalBtn" class="text-white hover:text-gray-200 transition-colors">
+                        <i class="fa fa-times text-xl"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- 弹窗内容 -->
+            <div class="p-6">
+                <!-- 登录表单 -->
+                <div id="loginForm">
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-gray-700 font-medium mb-2" for="loginUsername">
+                                用户名/手机号
+                            </label>
+                            <div class="relative">
+                                <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400">
+                                    <i class="fa fa-user"></i>
+                                </span>
+                                <input type="text" id="loginUsername" class="w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all" 
+                                       placeholder="请输入用户名或手机号">
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-gray-700 font-medium mb-2" for="loginPassword">
+                                密码
+                            </label>
+                            <div class="relative">
+                                <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400">
+                                    <i class="fa fa-lock"></i>
+                                </span>
+                                <input type="password" id="loginPassword" class="w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all" 
+                                       placeholder="请输入密码">
+                                <button type="button" id="togglePassword" class="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-400 hover:text-gray-600 transition-colors">
+                                    <i class="fa fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <input id="rememberMe" type="checkbox" class="h-4 w-4 text-orange-600 focus:ring-orange-500 border-gray-300 rounded">
+                                <label for="rememberMe" class="ml-2 block text-sm text-gray-700">
+                                    记住我
+                                </label>
+                            </div>
+                            <a href="#" class="text-sm text-orange-600 hover:text-orange-700 transition-colors">
+                                忘记密码?
+                            </a>
+                        </div>
+                        
+                        <button id="loginBtn" class="w-full gradient-primary text-white font-bold py-3 px-4 rounded-lg transition-all transform hover:scale-105">
+                            登录
+                        </button>
+                        
+                        <div class="text-center">
+                            <p class="text-sm text-gray-600">
+                                还没有账号? <a href="#" id="showRegisterBtn" class="text-orange-600 hover:text-orange-700 transition-colors">立即注册</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 注册表单 -->
+                <div id="registerForm" class="hidden">
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-gray-700 font-medium mb-2" for="registerUsername">
+                                用户名
+                            </label>
+                            <div class="relative">
+                                <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400">
+                                    <i class="fa fa-user"></i>
+                                </span>
+                                <input type="text" id="registerUsername" class="w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all" 
+                                       placeholder="请输入用户名">
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-gray-700 font-medium mb-2" for="registerPhone">
+                                手机号
+                            </label>
+                            <div class="relative">
+                                <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400">
+                                    <i class="fa fa-phone"></i>
+                                </span>
+                                <input type="tel" id="registerPhone" class="w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all" 
+                                       placeholder="请输入手机号">
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-gray-700 font-medium mb-2" for="registerCode">
+                                验证码
+                            </label>
+                            <div class="flex space-x-2">
+                                <div class="relative flex-1">
+                                    <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400">
+                                        <i class="fa fa-shield"></i>
+                                    </span>
+                                    <input type="text" id="registerCode" class="w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all" 
+                                           placeholder="请输入验证码">
+                                </div>
+                                <button id="getCodeBtn" class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-medium py-3 px-4 rounded-lg transition-all whitespace-nowrap">
+                                    获取验证码
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-gray-700 font-medium mb-2" for="registerPassword">
+                                密码
+                            </label>
+                            <div class="relative">
+                                <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400">
+                                    <i class="fa fa-lock"></i>
+                                </span>
+                                <input type="password" id="registerPassword" class="w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all" 
+                                       placeholder="请输入密码">
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-gray-700 font-medium mb-2" for="registerConfirmPassword">
+                                确认密码
+                            </label>
+                            <div class="relative">
+                                <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400">
+                                    <i class="fa fa-lock"></i>
+                                </span>
+                                <input type="password" id="registerConfirmPassword" class="w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all" 
+                                       placeholder="请确认密码">
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center">
+                            <input id="agreeTerms" type="checkbox" class="h-4 w-4 text-orange-600 focus:ring-orange-500 border-gray-300 rounded">
+                            <label for="agreeTerms" class="ml-2 block text-sm text-gray-700">
+                                我已阅读并同意<a href="#" class="text-orange-600 hover:text-orange-700 transition-colors">用户协议</a>和<a href="#" class="text-orange-600 hover:text-orange-700 transition-colors">隐私政策</a>
+                            </label>
+                        </div>
+                        
+                        <button id="registerBtn" class="w-full gradient-primary text-white font-bold py-3 px-4 rounded-lg transition-all transform hover:scale-105">
+                            注册
+                        </button>
+                        
+                        <div class="text-center">
+                            <p class="text-sm text-gray-600">
+                                已有账号? <a href="#" id="showLoginBtn" class="text-orange-600 hover:text-orange-700 transition-colors">立即登录</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.body.style.opacity = '1';
+            document.body.style.visibility = 'visible';
+            
+            const featuresSection = document.getElementById('features');
+            if (featuresSection) {
+                featuresSection.style.opacity = '1';
+                featuresSection.style.visibility = 'visible';
+            }
+        });
+        
+        window.addEventListener('load', function() {
+            const featureCards = document.querySelectorAll('.feature-card');
+            featureCards.forEach(card => {
+                card.style.opacity = '1';
+                card.style.visibility = 'visible';
+            });
+        });
+        
+        // 导航栏滚动效果
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 100) {
+                navbar.classList.add('shadow-lg');
+                navbar.classList.remove('shadow-md');
+            } else {
+                navbar.classList.remove('shadow-lg');
+                navbar.classList.add('shadow-md');
+            }
+        });
+
+        // 返回顶部按钮
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 300) {
+                backToTop.classList.remove('opacity-0', 'invisible');
+                backToTop.classList.add('opacity-100', 'visible');
+            } else {
+                backToTop.classList.add('opacity-0', 'invisible');
+                backToTop.classList.remove('opacity-100', 'visible');
+            }
+        });
+
+        backToTop.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // 联系表单提交
+        const contactForm = document.getElementById('contactForm');
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('contactName').value;
+            const phone = document.getElementById('contactPhone').value;
+            const email = document.getElementById('contactEmail').value;
+            const subject = document.getElementById('contactSubject').value;
+            const message = document.getElementById('contactMessage').value;
+            const agree = document.getElementById('contactAgree').checked;
+            
+            if (!name) {
+                alert('请输入您的姓名');
+                return;
+            }
+            
+            if (!phone) {
+                alert('请输入您的手机号');
+                return;
+            }
+            
+            if (!/^1[3-9]\d{9}$/.test(phone)) {
+                alert('请输入有效的手机号');
+                return;
+            }
+            
+            if (!email) {
+                alert('请输入您的电子邮箱');
+                return;
+            }
+            
+            if (!/\S+@\S+\.\S+/.test(email)) {
+                alert('请输入有效的电子邮箱');
+                return;
+            }
+            
+            if (!subject) {
+                alert('请选择咨询主题');
+                return;
+            }
+            
+            if (!message) {
+                alert('请输入您的咨询内容');
+                return;
+            }
+            
+            if (!agree) {
+                alert('请阅读并同意隐私政策');
+                return;
+            }
+            
+            // 模拟提交
+            alert('咨询提交成功！我们将在24小时内与您联系，请保持手机畅通。');
+            contactForm.reset();
+        });
+
+        // 登录/注册弹窗功能
+        const loginRegisterBtn = document.getElementById('loginRegisterBtn');
+        const loginRegisterModal = document.getElementById('loginRegisterModal');
+        const modalContent = document.getElementById('modalContent');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+        const loginForm = document.getElementById('loginForm');
+        const registerForm = document.getElementById('registerForm');
+        const showRegisterBtn = document.getElementById('showRegisterBtn');
+        const showLoginBtn = document.getElementById('showLoginBtn');
+        const modalTitle = document.getElementById('modalTitle');
+        const togglePassword = document.getElementById('togglePassword');
+        const loginPassword = document.getElementById('loginPassword');
+        const getCodeBtn = document.getElementById('getCodeBtn');
+        const loginBtn = document.getElementById('loginBtn');
+        const registerBtn = document.getElementById('registerBtn');
+
+        // 打开弹窗
+        loginRegisterBtn.addEventListener('click', function() {
+            loginRegisterModal.classList.remove('hidden');
+            setTimeout(() => {
+                modalContent.classList.add('scale-100', 'opacity-100');
+                modalContent.classList.remove('scale-95', 'opacity-0');
+            }, 10);
+            // 禁止背景滚动
+            document.body.style.overflow = 'hidden';
+        });
+
+        // 关闭弹窗
+        function closeModal() {
+            modalContent.classList.remove('scale-100', 'opacity-100');
+            modalContent.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => {
+                loginRegisterModal.classList.add('hidden');
+            }, 300);
+            // 恢复背景滚动
+            document.body.style.overflow = '';
+        }
+
+        closeModalBtn.addEventListener('click', closeModal);
+
+        // 点击背景关闭弹窗
+        loginRegisterModal.addEventListener('click', function(e) {
+            if (e.target === loginRegisterModal) {
+                closeModal();
+            }
+        });
+
+        // 切换登录/注册表单
+        showRegisterBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            loginForm.classList.add('hidden');
+            registerForm.classList.remove('hidden');
+            modalTitle.textContent = '用户注册';
+        });
+
+        showLoginBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            registerForm.classList.add('hidden');
+            loginForm.classList.remove('hidden');
+            modalTitle.textContent = '用户登录';
+        });
+
+        // 切换密码可见性
+        togglePassword.addEventListener('click', function() {
+            const type = loginPassword.getAttribute('type') === 'password' ? 'text' : 'password';
+            loginPassword.setAttribute('type', type);
+            this.innerHTML = type === 'password' ? '<i class="fa fa-eye"></i>' : '<i class="fa fa-eye-slash"></i>';
+        });
+
+        // 获取验证码
+        getCodeBtn.addEventListener('click', function() {
+            const phone = document.getElementById('registerPhone').value;
+            if (!phone) {
+                alert('请输入手机号');
+                return;
+            }
+            
+            if (!/^1[3-9]\d{9}$/.test(phone)) {
+                alert('请输入有效的手机号');
+                return;
+            }
+            
+            // 模拟发送验证码
+            let countdown = 60;
+            this.disabled = true;
+            this.textContent = `重新获取(${countdown})`;
+            
+            const timer = setInterval(() => {
+                countdown--;
+                this.textContent = `重新获取(${countdown})`;
+                if (countdown <= 0) {
+                    clearInterval(timer);
+                    this.disabled = false;
+                    this.textContent = '获取验证码';
+                }
+            }, 1000);
+            
+            alert('验证码已发送到您的手机，请注意查收');
+        });
+
+        // 登录按钮
+        loginBtn.addEventListener('click', function() {
+            const username = document.getElementById('loginUsername').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            if (!username) {
+                alert('请输入用户名或手机号');
+                return;
+            }
+            
+            if (!password) {
+                alert('请输入密码');
+                return;
+            }
+            
+            // 模拟登录
+            alert('登录成功！欢迎使用AI芒果农业教学平台');
+            closeModal();
+        });
+
+        // 注册按钮
+        registerBtn.addEventListener('click', function() {
+            const username = document.getElementById('registerUsername').value;
+            const phone = document.getElementById('registerPhone').value;
+            const code = document.getElementById('registerCode').value;
+            const password = document.getElementById('registerPassword').value;
+            const confirmPassword = document.getElementById('registerConfirmPassword').value;
+            const agreeTerms = document.getElementById('agreeTerms').checked;
+            
+            if (!username) {
+                alert('请输入用户名');
+                return;
+            }
+            
+            if (!phone) {
+                alert('请输入手机号');
+                return;
+            }
+            
+            if (!/^1[3-9]\d{9}$/.test(phone)) {
+                alert('请输入有效的手机号');
+                return;
+            }
+            
+            if (!code) {
+                alert('请输入验证码');
+                return;
+            }
+            
+            if (!password) {
+                alert('请输入密码');
+                return;
+            }
+            
+            if (password.length < 6) {
+                alert('密码长度不能少于6位');
+                return;
+            }
+            
+            if (password !== confirmPassword) {
+                alert('两次输入的密码不一致');
+                return;
+            }
+            
+            if (!agreeTerms) {
+                alert('请阅读并同意用户协议和隐私政策');
+                return;
+            }
+            
+            // 模拟注册
+            alert('注册成功！请登录使用平台');
+            registerForm.classList.add('hidden');
+            loginForm.classList.remove('hidden');
+            modalTitle.textContent = '用户登录';
+        });
+    </script>
+
+    <!-- AI助手模块 -->
+    <div id="aiAssistant" class="fixed bottom-6 right-6 z-50 flex flex-col items-end">
+        <!-- 最小化按钮 -->
+        <button id="aiToggleBtn" onclick="toggleAIAssistant()" class="gradient-primary text-white w-16 h-16 rounded-full shadow-2xl flex items-center justify-center transition-all hover:scale-110 hover:shadow-3xl mb-4">
+            <i id="aiToggleIcon" class="fa fa-comments text-2xl"></i>
+            <span id="aiBadge" class="absolute -top-1 -right-1 bg-red-500 text-white text-xs w-6 h-6 rounded-full flex items-center justify-center hidden">1</span>
+        </button>
+
+        <!-- AI助手主面板 -->
+        <div id="aiPanel" class="hidden bg-white rounded-3xl shadow-2xl w-[calc(100vw-3rem)] sm:w-[400px] md:w-[450px] lg:w-[500px] max-h-[600px] flex flex-col overflow-hidden transition-all duration-300">
+            <!-- 头部 -->
+            <div class="gradient-primary px-6 py-4 flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
+                        <i class="fa fa-robot text-white text-lg"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-white font-bold text-lg">AI农业助手</h3>
+                        <p class="text-white/80 text-xs">随时为您解答农业问题</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <button onclick="clearChatHistory()" class="text-white/80 hover:text-white transition-colors p-2" title="清空历史">
+                        <i class="fa fa-trash text-sm"></i>
+                    </button>
+                    <button onclick="toggleAIAssistant()" class="text-white/80 hover:text-white transition-colors p-2" title="关闭">
+                        <i class="fa fa-times text-lg"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- 对话区域 -->
+            <div id="chatMessages" class="flex-1 overflow-y-auto p-4 space-y-4 bg-gradient-to-b from-orange-50 to-white">
+                <!-- 欢迎消息 -->
+                <div class="flex items-start space-x-3">
+                    <div class="w-8 h-8 gradient-primary rounded-full flex items-center justify-center flex-shrink-0">
+                        <i class="fa fa-robot text-white text-sm"></i>
+                    </div>
+                    <div class="flex-1">
+                        <div class="bg-white rounded-2xl rounded-tl-none p-4 shadow-sm border border-gray-100">
+                            <p class="text-gray-700 text-sm leading-relaxed">您好！我是AI农业助手，可以帮您解答关于芒果种植、病虫害防治、市场行情等各种农业问题。请问有什么可以帮您的？</p>
+                        </div>
+                        <span class="text-xs text-gray-400 mt-1 block">刚刚</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 加载状态 -->
+            <div id="loadingIndicator" class="hidden px-4 py-3 bg-gradient-to-b from-orange-50 to-white">
+                <div class="flex items-center space-x-3">
+                    <div class="w-8 h-8 gradient-primary rounded-full flex items-center justify-center flex-shrink-0">
+                        <i class="fa fa-robot text-white text-sm"></i>
+                    </div>
+                    <div class="flex-1">
+                        <div class="bg-white rounded-2xl rounded-tl-none p-3 shadow-sm border border-gray-100">
+                            <div class="flex items-center space-x-2">
+                                <div class="w-2 h-2 bg-primary rounded-full animate-bounce"></div>
+                                <div class="w-2 h-2 bg-primary rounded-full animate-bounce" style="animation-delay: 0.1s"></div>
+                                <div class="w-2 h-2 bg-primary rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
+                                <span class="text-gray-500 text-xs ml-2">正在思考中...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 错误提示 -->
+            <div id="errorMessage" class="hidden px-4 py-3 bg-red-50 border-t border-red-200">
+                <div class="flex items-center space-x-2 text-red-600 text-sm">
+                    <i class="fa fa-exclamation-circle"></i>
+                    <span id="errorText">AI服务暂时不可用，请稍后再试</span>
+                </div>
+            </div>
+
+            <!-- 快捷问题 -->
+            <div id="quickQuestions" class="px-4 py-3 bg-gradient-to-b from-orange-50 to-white border-t border-gray-100">
+                <p class="text-xs text-gray-500 mb-2">快捷问题：</p>
+                <div class="flex flex-wrap gap-2">
+                    <button onclick="sendQuickQuestion('如何提高芒果产量？')" class="text-xs bg-white border border-gray-200 text-gray-700 px-3 py-1.5 rounded-full hover:border-primary hover:text-primary transition-colors">如何提高芒果产量？</button>
+                    <button onclick="sendQuickQuestion('芒果病虫害如何防治？')" class="text-xs bg-white border border-gray-200 text-gray-700 px-3 py-1.5 rounded-full hover:border-primary hover:text-primary transition-colors">芒果病虫害如何防治？</button>
+                    <button onclick="sendQuickQuestion('芒果什么时候采摘最好？')" class="text-xs bg-white border border-gray-200 text-gray-700 px-3 py-1.5 rounded-full hover:border-primary hover:text-primary transition-colors">芒果什么时候采摘最好？</button>
+                </div>
+            </div>
+
+            <!-- 输入区域 -->
+            <div class="p-4 bg-white border-t border-gray-100">
+                <div class="flex items-center space-x-3">
+                    <div class="flex-1 relative">
+                        <textarea id="userInput" 
+                            class="w-full bg-gray-50 border border-gray-200 rounded-2xl px-4 py-3 pr-12 text-sm focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 resize-none transition-all" 
+                            placeholder="输入您的问题..." 
+                            rows="1"
+                            onkeydown="handleKeyDown(event)"
+                            oninput="autoResize(this)"></textarea>
+                        <button onclick="sendMessage()" class="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 gradient-primary rounded-full flex items-center justify-center hover:scale-110 transition-transform">
+                            <i class="fa fa-paper-plane text-white text-sm"></i>
+                        </button>
+                    </div>
+                </div>
+                <p class="text-xs text-gray-400 mt-2 text-center">按 Enter 发送，Shift + Enter 换行</p>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        #aiAssistant .shadow-3xl {
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        #chatMessages::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        #chatMessages::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        #chatMessages::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 3px;
+        }
+
+        #chatMessages::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .message-animate {
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-4px);
+            }
+        }
+
+        .animate-bounce {
+            animation: bounce 1s ease-in-out infinite;
+        }
+    </style>
+
+    <script>
+        let chatHistory = [];
+        let isAIProcessing = false;
+
+        function toggleAIAssistant() {
+            const panel = document.getElementById('aiPanel');
+            const icon = document.getElementById('aiToggleIcon');
+            const badge = document.getElementById('aiBadge');
+
+            if (panel.classList.contains('hidden')) {
+                panel.classList.remove('hidden');
+                icon.classList.remove('fa-comments');
+                icon.classList.add('fa-times');
+                badge.classList.add('hidden');
+                document.getElementById('userInput').focus();
+            } else {
+                panel.classList.add('hidden');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-comments');
+            }
+        }
+
+        function autoResize(textarea) {
+            textarea.style.height = 'auto';
+            textarea.style.height = Math.min(textarea.scrollHeight, 120) + 'px';
+        }
+
+        function handleKeyDown(event) {
+            if (event.key === 'Enter' && !event.shiftKey) {
+                event.preventDefault();
+                sendMessage();
+            }
+        }
+
+        function sendQuickQuestion(question) {
+            document.getElementById('userInput').value = question;
+            sendMessage();
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('userInput');
+            const message = input.value.trim();
+
+            if (!message || isAIProcessing) return;
+
+            addMessageToChat(message, 'user');
+            input.value = '';
+            input.style.height = 'auto';
+
+            processAIResponse(message);
+        }
+
+        function addMessageToChat(message, sender) {
+            const chatMessages = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'flex items-start space-x-3 message-animate';
+
+            const now = new Date();
+            const timeStr = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
+
+            if (sender === 'user') {
+                messageDiv.innerHTML = `
+                    <div class="flex-1 flex justify-end">
+                        <div class="max-w-[80%]">
+                            <div class="gradient-primary rounded-2xl rounded-tr-none p-4 shadow-sm">
+                                <p class="text-white text-sm leading-relaxed">${escapeHtml(message)}</p>
+                            </div>
+                            <span class="text-xs text-gray-400 mt-1 block text-right">${timeStr}</span>
+                        </div>
+                    </div>
+                    <div class="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center flex-shrink-0">
+                        <i class="fa fa-user text-gray-600 text-sm"></i>
+                    </div>
+                `;
+            } else {
+                messageDiv.innerHTML = `
+                    <div class="w-8 h-8 gradient-primary rounded-full flex items-center justify-center flex-shrink-0">
+                        <i class="fa fa-robot text-white text-sm"></i>
+                    </div>
+                    <div class="flex-1">
+                        <div class="bg-white rounded-2xl rounded-tl-none p-4 shadow-sm border border-gray-100">
+                            <p class="text-gray-700 text-sm leading-relaxed">${message}</p>
+                        </div>
+                        <span class="text-xs text-gray-400 mt-1 block">${timeStr}</span>
+                    </div>
+                `;
+            }
+
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+
+            chatHistory.push({
+                role: sender,
+                content: message,
+                timestamp: now.getTime()
+            });
+
+            saveChatHistory();
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        async function processAIResponse(userMessage) {
+            isAIProcessing = true;
+            showLoading(true);
+            hideError();
+
+            try {
+                const response = await getAIResponse(userMessage);
+                addMessageToChat(response, 'ai');
+            } catch (error) {
+                console.error('AI响应错误:', error);
+                showError('AI服务暂时不可用，请稍后再试');
+            } finally {
+                isAIProcessing = false;
+                showLoading(false);
+            }
+        }
+
+        async function getAIResponse(message) {
+            const lowerMessage = message.toLowerCase();
+
+            await new Promise(resolve => setTimeout(resolve, 1000 + Math.random() * 1000));
+
+            if (lowerMessage.includes('产量') || lowerMessage.includes('提高')) {
+                return '提高芒果产量的方法包括：1）选择优良品种，如台农1号、金煌芒等；2）科学施肥，根据生长期调整氮磷钾比例；3）合理灌溉，保持土壤湿润但不积水；4）及时修剪，保持树形通风透光；5）病虫害防治，定期喷洒保护性药剂；6）适时采收，避免过早或过晚采摘。建议您根据当地气候和土壤条件，制定个性化的种植方案。';
+            } else if (lowerMessage.includes('病虫害') || lowerMessage.includes('防治')) {
+                return '芒果常见病虫害及防治方法：\n\n主要病害：\n1. 炭疽病 - 用多菌灵或甲基托布津防治\n2. 白粉病 - 用三唑酮或粉锈宁防治\n3. 细菌性角斑病 - 用铜制剂防治\n\n主要虫害：\n1. 芒果蚜虫 - 用吡虫啉防治\n2. 蓟马 - 用阿维菌素防治\n3. 螨类 - 用哒螨灵防治\n\n建议采用综合防治策略，定期巡园，早发现早治疗。';
+            } else if (lowerMessage.includes('采摘') || lowerMessage.includes('采收')) {
+                return '芒果采摘的最佳时机：\n\n1. 观察果皮颜色：果皮由绿转黄或品种特有的成熟色\n2. 检查果肉硬度：手指轻按有弹性，不过硬也不过软\n3. 测量糖度：可溶性固形物达到15-18%\n4. 观察果柄：果柄处出现离层，容易脱落\n\n采摘注意事项：\n- 选择晴天上午采摘\n- 留果柄2-3cm\n- 轻拿轻放，避免机械损伤\n- 采摘后及时预冷\n\n不同品种成熟期不同，台农芒约在6-7月，金煌芒在7-8月。';
+            } else if (lowerMessage.includes('施肥') || lowerMessage.includes('肥料')) {
+                return '芒果施肥建议：\n\n基肥（采果后）：\n- 有机肥为主，每株施腐熟农家肥20-30kg\n- 配合复合肥1-2kg\n\n追肥：\n1. 花前肥（1-2月）：氮肥为主，促进花芽分化\n2. 壮果肥（4-5月）：钾肥为主，提高果实品质\n3. 采果肥（采果后）：氮磷钾平衡，恢复树势\n\n注意事项：\n- 根据树龄和产量调整施肥量\n- 避免在雨天施肥\n- 施肥后及时浇水\n- 建议进行土壤检测，精准施肥';
+            } else if (lowerMessage.includes('价格') || lowerMessage.includes('市场') || lowerMessage.includes('行情')) {
+                return '当前芒果市场行情分析：\n\n价格趋势：\n- 台农1号：8-15元/斤\n- 金煌芒：12-20元/斤\n- 凯特芒：10-18元/斤\n- 贵妃芒：15-25元/斤\n\n影响因素：\n1. 季节性：夏季价格较低，冬季价格较高\n2. 品质：优质果价格比普通果高30-50%\n3. 地区：主产区价格较低，销区价格较高\n4. 供需关系：丰收年价格下降，歉收年价格上涨\n\n建议：\n- 关注市场动态，把握销售时机\n- 提升品质，提高售价\n- 拓展销售渠道，减少中间环节';
+            } else {
+                return '感谢您的提问！关于"' + message + '"这个问题，我建议您：\n\n1. 如果是种植技术问题，可以咨询当地农业技术推广站\n2. 如果是病虫害问题，可以使用我们的AI病虫害诊断系统\n3. 如果是市场行情问题，可以查看我们的市场预测系统\n\n您也可以提供更多详细信息，我会尽力为您提供更准确的答案。请问您具体想了解哪个方面呢？';
+            }
+        }
+
+        function showLoading(show) {
+            const loadingIndicator = document.getElementById('loadingIndicator');
+            if (show) {
+                loadingIndicator.classList.remove('hidden');
+            } else {
+                loadingIndicator.classList.add('hidden');
+            }
+        }
+
+        function showError(message) {
+            const errorDiv = document.getElementById('errorMessage');
+            const errorText = document.getElementById('errorText');
+            errorText.textContent = message;
+            errorDiv.classList.remove('hidden');
+
+            setTimeout(() => {
+                hideError();
+            }, 5000);
+        }
+
+        function hideError() {
+            document.getElementById('errorMessage').classList.add('hidden');
+        }
+
+        function clearChatHistory() {
+            if (confirm('确定要清空对话历史吗？')) {
+                chatHistory = [];
+                const chatMessages = document.getElementById('chatMessages');
+                chatMessages.innerHTML = `
+                    <div class="flex items-start space-x-3">
+                        <div class="w-8 h-8 gradient-primary rounded-full flex items-center justify-center flex-shrink-0">
+                            <i class="fa fa-robot text-white text-sm"></i>
+                        </div>
+                        <div class="flex-1">
+                            <div class="bg-white rounded-2xl rounded-tl-none p-4 shadow-sm border border-gray-100">
+                                <p class="text-gray-700 text-sm leading-relaxed">您好！我是AI农业助手，可以帮您解答关于芒果种植、病虫害防治、市场行情等各种农业问题。请问有什么可以帮您的？</p>
+                            </div>
+                            <span class="text-xs text-gray-400 mt-1 block">刚刚</span>
+                        </div>
+                    </div>
+                `;
+                localStorage.removeItem('aiChatHistory');
+            }
+        }
+
+        function saveChatHistory() {
+            try {
+                localStorage.setItem('aiChatHistory', JSON.stringify(chatHistory));
+            } catch (e) {
+                console.warn('无法保存聊天历史:', e);
+            }
+        }
+
+        function loadChatHistory() {
+            try {
+                const saved = localStorage.getItem('aiChatHistory');
+                if (saved) {
+                    chatHistory = JSON.parse(saved);
+                    const chatMessages = document.getElementById('chatMessages');
+
+                    chatHistory.forEach((msg, index) => {
+                        if (index === 0) return;
+
+                        const messageDiv = document.createElement('div');
+                        messageDiv.className = 'flex items-start space-x-3';
+
+                        const date = new Date(msg.timestamp);
+                        const timeStr = date.getHours().toString().padStart(2, '0') + ':' + date.getMinutes().toString().padStart(2, '0');
+
+                        if (msg.role === 'user') {
+                            messageDiv.innerHTML = `
+                                <div class="flex-1 flex justify-end">
+                                    <div class="max-w-[80%]">
+                                        <div class="gradient-primary rounded-2xl rounded-tr-none p-4 shadow-sm">
+                                            <p class="text-white text-sm leading-relaxed">${escapeHtml(msg.content)}</p>
+                                        </div>
+                                        <span class="text-xs text-gray-400 mt-1 block text-right">${timeStr}</span>
+                                    </div>
+                                </div>
+                                <div class="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <i class="fa fa-user text-gray-600 text-sm"></i>
+                                </div>
+                            `;
+                        } else {
+                            messageDiv.innerHTML = `
+                                <div class="w-8 h-8 gradient-primary rounded-full flex items-center justify-center flex-shrink-0">
+                                    <i class="fa fa-robot text-white text-sm"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="bg-white rounded-2xl rounded-tl-none p-4 shadow-sm border border-gray-100">
+                                        <p class="text-gray-700 text-sm leading-relaxed">${msg.content}</p>
+                                    </div>
+                                    <span class="text-xs text-gray-400 mt-1 block">${timeStr}</span>
+                                </div>
+                            `;
+                        }
+
+                        chatMessages.appendChild(messageDiv);
+                    });
+
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                }
+            } catch (e) {
+                console.warn('无法加载聊天历史:', e);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            loadChatHistory();
+        });
+    </script>
+</body>
+</html>
